@@ -1,4 +1,5 @@
 console.log('Lists')
+
 function List() {
   this.listSize = 0;
   this.pos = 0;
@@ -115,19 +116,19 @@ function append(element) {
   this.dataStore[this.listSize++] = element;
 }
 
-var names = new List();
-names.append("Bob");
-names.append("Alice");
-names.append("Mallory");
-console.log(names.dataStore);
+// var names = new List();
+// names.append("Bob");
+// names.append("Alice");
+// names.append("Mallory");
+// console.log(names.dataStore);
 //iterating through list forward
-for(names.front(); names.currPos() < names.length(); names.next()) {
-  console.log(names.getElement());
-}
+// for(names.front(); names.currPos() < names.length(); names.next()) {
+//   console.log(names.getElement());
+// }
 //iterating through list backward
-for(names.end(); names.currPos() > -1; names.prev()) {
-  console.log(names.getElement());
-}
+// for(names.end(); names.currPos() > -1; names.prev()) {
+//   console.log(names.getElement());
+// }
 // original (5) ["Frank", "Alice", "Mallory", "Bob", "Bernadette"]
 // var firstSlice = names.dataStore.splice(1, 3)
 // original (2) ["Frank", "Bernadette"]
@@ -142,3 +143,69 @@ for(names.end(); names.currPos() > -1; names.prev()) {
 // original #3 (4) ["Frank", "Alice", "Mallory", "Bernadette"]
 // secondSlice  names.dataStore.splice(0, 3) (3) ["Frank", "Alice", "Mallory"]
 // original #3 ["Bernadette"]
+
+//Films program
+var movies = [
+'Shawshank Redemption',
+'The Godfather',
+'The Godfather: Part II',
+'Pulp Fiction',
+'The Good, the Bad and the Ugly',
+'12 Angry element',
+'Schindler\'s Lists',
+'The Dark Knight',
+'The Lord of the Rings: The Return of the working',
+'Fight Club',
+'Star Wars',
+'One Flew Over the Cuckoo\'s Nest',
+'The Lord of the Rings: The Fellowship of the Ring',
+'Inception',
+'Goodfellas',
+'Star Wars',
+'Seven Samurai',
+'The Matrix',
+'Forrest Gump',
+'City of God']
+
+var customers = new List();
+
+function Customer(name, movie) {
+  this.name = name;
+  this.movie = movie;
+}
+
+var movieList = new List();
+for (var i = 0; i < movies.length; ++i) {
+  movieList.append(movies[i]);
+}
+
+function checkOut(name, movie, filmList, customerList) {
+  if (filmList.contains(movie)) {
+    var c = new Customer(name, movie);
+    customerList.append(c);
+    filmList.remove(movie)
+  } else {
+    console.log(movie + " is not available.");
+  }
+
+
+function displayList(list) {
+  for (list.front(); list.currPos() < list.length(); list.next()) {
+    if (list.getElement() instanceof Customer) {
+      console.log(list.getElement()["name"] + ", " +
+    list.getElement()["movie"]);
+  } else {
+    console.log(list.currPos()+1 + ". " + list.getElement());
+    }
+  }
+}
+
+console.log("Available Movies: ")
+displayList(movieList)
+var name = prompt("Enter your name: ")
+var movie = prompt("What movie would you like?")
+checkOut(name, movie, movieList, customers);
+console.log("\nCustomer Rentals: \n");
+displayList(customers)
+console.log("\n Movies Now Available:\n")
+displayList(movieList)
